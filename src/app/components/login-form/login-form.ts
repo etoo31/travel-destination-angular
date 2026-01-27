@@ -21,7 +21,9 @@ export class LoginForm implements AfterViewInit {
   @ViewChild('errorMessageElement')
   errorMessageElement!: ElementRef<HTMLInputElement>;
 
-  handleLogin() {
+  handleLogin(event: Event) {
+    event.preventDefault();
+
     const { username, password, userType } = this.loginForm.value;
     if (username && password && userType) {
       this.errorMessage.update((prev) => '');

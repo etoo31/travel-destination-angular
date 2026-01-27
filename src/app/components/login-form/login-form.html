@@ -1,4 +1,4 @@
-<form id="loginForm" class="login-form" [formGroup]="loginForm" (submit)="handleLogin()">
+<form id="loginForm" class="login-form" [formGroup]="loginForm" (submit)="handleLogin($event)">
   <div class="form-group">
     <label for="username">Username</label>
     <input
