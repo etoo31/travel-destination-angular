@@ -11,4 +11,16 @@ export const routes: Routes = [
     redirectTo: 'login',
     pathMatch: 'full',
   },
+  {
+    path: 'user-dashboard',
+    pathMatch: 'full',
+    loadComponent: () =>
+      import('./pages/user-dashboard-page/user-dashboard-page').then((m) => m.UserDashboardPage),
+  },
+  {
+    path: 'admin-dashboard',
+    pathMatch: 'full',
+    loadComponent: () =>
+      import('./pages/admin-dashboard-page/admin-dashboard-page').then((m) => m.AdminDashboardPage),
+  },
 ];
