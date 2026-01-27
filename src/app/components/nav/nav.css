@@ -1,0 +1,28 @@
+.navbar {
+  background: var(--card-bg);
+  box-shadow: var(--shadow-sm);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+.nav-container {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: var(--spacing-md) var(--spacing-lg);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.nav-brand h2 {
+  color: var(--primary-color);
+  font-size: 1.5rem;
+}
+.nav-menu {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-md);
+}
+.user-info {
+  color: var(--text-secondary);
+  font-size: 0.95rem;
+}
