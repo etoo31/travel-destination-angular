@@ -86,3 +86,12 @@ body {
   padding: 0.4rem 0.8rem;
   font-size: 0.85rem;
 }
+
+.error-message {
+  color: var(--danger-color);
+  background-color: #fee;
+  padding: vard(--spacing-sm);
+  border-radius: var(--radius-md);
+  margin-top: var(--spacing-md);
+  border: 1px solid var(--danger-color);
+}
