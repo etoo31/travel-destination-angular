@@ -1,4 +1,4 @@
-import { Component, signal } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, signal, ViewChild } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 @Component({
   selector: 'app-login-form',
@@ -6,7 +6,10 @@ import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
   templateUrl: './login-form.html',
   styleUrl: './login-form.css',
 })
-export class LoginForm {
+export class LoginForm implements AfterViewInit {
+  ngAfterViewInit(): void {
+    this.errorMessageElement.nativeElement.style.display = 'none';
+  }
   errorMessage = signal('');
 
   loginForm = new FormGroup({
@@ -15,14 +18,17 @@ export class LoginForm {
     userType: new FormControl(''),
   });
 
+  @ViewChild('errorMessageElement')
+  errorMessageElement!: ElementRef<HTMLInputElement>;
+
   handleLogin() {
     const { username, password, userType } = this.loginForm.value;
     if (username && password && userType) {
-      this.errorMessage.set(
-        `Logging in with\nUsername: ${username}\nPassword: ${password}\nUser Type: ${userType}`,
-      );
+      this.errorMessage.update((prev) => '');
+      this.errorMessageElement.nativeElement.style.display = 'none';
     } else {
-      this.errorMessage.set('Please fill in all fields.');
+      this.errorMessage.update((prev) => 'Please fill in all fields.');
+      this.errorMessageElement.nativeElement.style.display = 'block';
     }
   }
 }
