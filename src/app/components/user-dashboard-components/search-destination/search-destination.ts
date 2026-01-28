@@ -1,9 +1,9 @@
 import { Component, computed, inject, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { DestinationService } from '../../services/destination-service';
-import { UnApprovedDestinations } from '../../models/unApprovedDestination.type';
-import { SearchFilterPipe } from '../../pipes/search-filter.pipe';
+import { DestinationService } from '../../../services/destination-service';
+import { UnApprovedDestinations } from '../../../models/unApprovedDestination.type';
+import { SearchFilterPipe } from '../../../pipes/search-filter.pipe';
 
 @Component({
   selector: 'app-search-destination',

@@ -1,5 +1,5 @@
 import { Component, computed, inject } from '@angular/core';
-import { DestinationService } from '../../services/destination-service';
+import { DestinationService } from '../../../services/destination-service';
 
 @Component({
   selector: 'app-destination-card',
