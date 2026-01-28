@@ -77,6 +77,18 @@ export class DestinationService {
     );
   }
 
+  approveUnApprovedDestination(destinationId: number): void {
+    const unApproved = this.unApprovedDestinations().find((d) => d.id === destinationId);
+    if (unApproved) {
+      // Add to approved destinations
+      this.destinations.update((destinations) => [...destinations, unApproved as any]);
+      // Remove from unapproved
+      this.unApprovedDestinations.update((destinations) =>
+        destinations.filter((d) => d.id !== destinationId),
+      );
+    }
+  }
+
   getDestinations() {
     return this.destinations();
   }
