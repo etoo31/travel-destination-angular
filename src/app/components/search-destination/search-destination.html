@@ -1,0 +1,66 @@
+<section class="search-section">
+  <div class="search-bar">
+    <input
+      type="text"
+      id="searchInput"
+      class="search-input"
+      placeholder="🔍 Search destinations by country"
+      [(ngModel)]="searchQuery"
+    />
+  </div>
+
+  <!-- Unapproved Destinations Section -->
+  <div class="unapproved-destinations-container">
+    <div class="section-header">
+      <h3>✨ Suggeste A Destination</h3>
+      <p>Check destinations you want to visit</p>
+    </div>
+
+    @if ((destinations() | searchFilter: searchQuery()).length > 0) {
+      <div class="destinations-list">
+        @for (destination of destinations() | searchFilter: searchQuery(); track destination.id) {
+          <div class="destination-item">
+            <div class="destination-item-content">
+              <div class="destination-item-flag">
+                <img [src]="destination.flagUrl" [alt]="'Flag of ' + destination.country" />
+              </div>
+              <div class="destination-item-info">
+                <h4 class="destination-item-title">{{ destination.country }}</h4>
+                <div class="destination-item-details">
+                  <span class="detail">📍 {{ destination.capital }}</span>
+                  <span class="detail">🌍 {{ destination.region }}</span>
+                  <span class="detail">💱 {{ destination.currency }}</span>
+                </div>
+              </div>
+            </div>
+            <label class="checkbox-label">
+              <input
+                type="checkbox"
+                [checked]="destination.isFav"
+                (change)="toggleWantToVisit(destination.id)"
+                class="checkbox-input"
+              />
+              <span class="checkbox-icon">
+                {{ destination.isFav ? '✅' : '☐' }}
+              </span>
+            </label>
+          </div>
+        }
+      </div>
+    } @else {
+      <div class="no-destinations">
+        <p>Country Not Found</p>
+      </div>
+    }
+  </div>
+
+  <div class="filter-bar">
+    @if (canUpdate()) {
+      <button id="suggestDestinationBtn" class="btn btn-primary">Add To Want To Visit List</button>
+    } @else {
+      <button id="suggestDestinationBtn" class="btn btn-disabled" [disabled]="!canUpdate()">
+        Add To Want To Visit List
+      </button>
+    }
+  </div>
+</section>

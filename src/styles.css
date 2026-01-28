@@ -52,6 +52,13 @@ body {
   color: white;
   width: 100%;
 }
+.btn-disabled {
+  background: var(--primary-color);
+  color: white;
+  width: 100%;
+  opacity: 0.5;
+  cursor: not-allowed;
+}
 .btn-primary:hover {
   background: var(--primary-dark);
   transform: translateY(-2px);
