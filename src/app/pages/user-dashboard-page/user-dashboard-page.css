@@ -2,24 +2,6 @@
   background-color: var(--bg-color);
   min-height: 100vh;
 }
-.dashboard-container {
-  max-width: 1400px;
-  margin: 0 auto;
-  padding: var(--spacing-lg);
-}
-.dashboard-content,
-.user-dashboard-content {
-  display: flex;
-  flex-direction: column;
-  gap: var(--spacing-lg);
-}
-.dashboard-section {
-  background: var(--card-bg);
-  border-radius: var(--radius-lg);
-  padding: var(--spacing-lg);
-  box-shadow: var(--shadow-sm);
-  animation: fadeIn 0.5s ease;
-}
 
 .destinations-section {
   background: var(--card-bg);

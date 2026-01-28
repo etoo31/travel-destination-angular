@@ -13,23 +13,40 @@
       </tr>
     </thead>
     <tbody id="suggestionsTableBody">
-      <tr>
-        <td><strong>Egypt</strong></td>
-        <td>Africa</td>
-        <td>12312313</td>
-        <td>USD</td>
-        @if (type() === 'pending') {
-          <td><span style="color: var(--primary-color)">1</span></td>
+      @if (destinations().length > 0) {
+        @for (destinantion of destinations(); track destinantion.id) {
+          <tr>
+            <td>
+              <strong>{{ destinantion.country }}</strong>
+            </td>
+            <td>{{ destinantion.region }}</td>
+            <td>{{ destinantion.population }}</td>
+            <td>{{ destinantion.currency }}</td>
+            @if (type() === 'pending') {
+              <td>
+                <span style="color: var(--primary-color)">{{ destinantion.noOfSuggestions }}</span>
+              </td>
+            }
+            <td class="table-actions">
+              @if (type() === 'pending') {
+                <button class="btn btn-success btn-small" (click)="handleApprove(destinantion.id)">
+                  Approve
+                </button>
+              } @else {
+                <button class="btn btn-danger btn-small" (click)="handleRemove(destinantion.id)">
+                  Remove
+                </button>
+              }
+            </td>
+          </tr>
         }
-        <td class="table-actions">
-          <button class="btn btn-success btn-small">Approve</button>
-        </td>
-      </tr>
-      <tr>
-        <td colspan="6" style="text-align: center; padding: 2rem; color: var(--text-secondary)">
-          No pending suggestions
-        </td>
-      </tr>
+      } @else {
+        <tr>
+          <td colspan="6" style="text-align: center; padding: 2rem; color: var(--text-secondary)">
+            No pending suggestions
+          </td>
+        </tr>
+      }
     </tbody>
   </table>
 </div>

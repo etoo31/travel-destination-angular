@@ -1,1 +1,103 @@
 <app-nav username="admin" />
+<div class="dashboard-container">
+  <div class="dashboard-content">
+    <!-- Pending Destination Suggestions -->
+    <section class="dashboard-section">
+      <div class="section-header">
+        <h2>📋 Pending Destination Suggestions</h2>
+        <p>Review and approve destination suggestions from users</p>
+      </div>
+
+      <app-destination-table type="pending" />
+    </section>
+
+    <!-- All unapproved Destinations -->
+    <section class="dashboard-section">
+      <div class="section-header">
+        <h2>✅ UnApproved Destinations</h2>
+        <p>Manage un approved destinations</p>
+      </div>
+
+      @if (unApprovedDestinations().length > 0) {
+        <div class="unapproved-container">
+          <div class="unapproved-list">
+            @for (destination of paginatedDestinations(); track trackByFn($index, destination)) {
+              <div class="unapproved-item">
+                <div class="item-flag">
+                  <img [src]="destination.flagUrl" [alt]="'Flag of ' + destination.country" />
+                </div>
+                <div class="item-info">
+                  <h4 class="item-title">{{ destination.country }}</h4>
+                  <div class="item-details">
+                    <span class="detail">📍 {{ destination.capital }}</span>
+                    <span class="detail">🌍 {{ destination.region }}</span>
+                    <span class="detail">👥 {{ destination.population | number }}</span>
+                    <span class="detail">💱 {{ destination.currency }}</span>
+                  </div>
+                </div>
+                <label class="approve-checkbox">
+                  <input
+                    type="checkbox"
+                    [checked]="isSelectedForApproval(destination.id)"
+                    (change)="toggleSelectForApproval(destination.id)"
+                    class="checkbox-input"
+                  />
+                  <span class="checkbox-icon">
+                    {{ isSelectedForApproval(destination.id) ? '✅' : '☐' }}
+                  </span>
+                </label>
+              </div>
+            }
+          </div>
+
+          <!-- Pagination -->
+          <div class="pagination">
+            <button
+              class="pagination-btn"
+              [disabled]="currentPage() === 1"
+              (click)="goToPage(currentPage() - 1)"
+            >
+              ← Previous
+            </button>
+
+            <div class="pagination-info">
+              <span>Page {{ currentPage() }} of {{ totalPages() }}</span>
+            </div>
+
+            <button
+              class="pagination-btn"
+              [disabled]="currentPage() === totalPages()"
+              (click)="goToPage(currentPage() + 1)"
+            >
+              Next →
+            </button>
+          </div>
+
+          @if (selectedForApproval().length > 0) {
+            <div class="action-bar">
+              <p class="selection-count">
+                {{ selectedForApproval().length }} destination(s) selected
+              </p>
+              <button class="btn btn-success" (click)="approveSelected()">
+                ✓ Approve Selected
+              </button>
+            </div>
+          }
+        </div>
+      } @else {
+        <div class="no-destinations">
+          <p>🎉 No unapproved destinations</p>
+        </div>
+      }
+    </section>
+
+    <section class="dashboard-section">
+      <div class="section-header">
+        <h2>✅ Approved Destinations</h2>
+        <p>Manage destinations visible to all users</p>
+      </div>
+
+      <app-destination-table type="approved" />
+    </section>
+  </div>
+</div>
