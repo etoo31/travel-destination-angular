@@ -1,0 +1,35 @@
+<div class="table-container">
+  <table id="suggestionsTable" class="data-table">
+    <thead>
+      <tr>
+        <th>Country</th>
+        <th>Region</th>
+        <th>Population</th>
+        <th>Currency</th>
+        @if (type() === 'pending') {
+          <th>Number Of Suggestions</th>
+        }
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody id="suggestionsTableBody">
+      <tr>
+        <td><strong>Egypt</strong></td>
+        <td>Africa</td>
+        <td>12312313</td>
+        <td>USD</td>
+        @if (type() === 'pending') {
+          <td><span style="color: var(--primary-color)">1</span></td>
+        }
+        <td class="table-actions">
+          <button class="btn btn-success btn-small">Approve</button>
+        </td>
+      </tr>
+      <tr>
+        <td colspan="6" style="text-align: center; padding: 2rem; color: var(--text-secondary)">
+          No pending suggestions
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
