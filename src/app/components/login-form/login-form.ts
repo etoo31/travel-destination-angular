@@ -1,5 +1,6 @@
-import { AfterViewInit, Component, ElementRef, signal, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, Inject, signal, ViewChild } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
+import { LoginService } from '../../services/login-service';
 @Component({
   selector: 'app-login-form',
   imports: [ReactiveFormsModule],
@@ -10,6 +11,9 @@ export class LoginForm implements AfterViewInit {
   ngAfterViewInit(): void {
     this.errorMessageElement.nativeElement.style.display = 'none';
   }
+
+  constructor(private loginService: LoginService) {}
+
   errorMessage = signal('');
 
   loginForm = new FormGroup({
@@ -28,6 +32,8 @@ export class LoginForm implements AfterViewInit {
     if (username && password && userType) {
       this.errorMessage.update((prev) => '');
       this.errorMessageElement.nativeElement.style.display = 'none';
+      this.loginService.handleLogin(username, password, userType);
+      this.errorMessage.update((prev) => 'Please fill in all fields.');
     } else {
       this.errorMessage.update((prev) => 'Please fill in all fields.');
       this.errorMessageElement.nativeElement.style.display = 'block';
