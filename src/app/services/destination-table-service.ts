@@ -186,34 +186,57 @@ export class DestinationTableService {
     }
   }
 
-  approveUnApprovedDestination(destinationId: number): void {
-    const unApproved = this.unApprovedDestinations().find((d) => d.id === destinationId);
-    if (unApproved) {
-      // Add to approved destinations
-      this.approvedDestinations.update((destinations) => [...destinations, unApproved as any]);
-      // Remove from unapproved
-      this.unApprovedDestinations.update((destinations) =>
-        destinations.filter((d) => d.id !== destinationId),
+  async handleApproveDestination(destination: Destination) {
+    const user = this.loginService.getCurrentUser();
+    const apiUrl = 'http://localhost:8080/admin/approve-destinations';
+
+    try {
+      const response: HttpResponse<any> = await firstValueFrom(
+        this.http.post<any>(apiUrl, destination, {
+          headers: new HttpHeaders({
+            authorization: user?.token || '',
+            userId: user?.userId || 0,
+          }),
+          observe: 'response',
+        }),
       );
+      console.log(response);
+      //remove them from unApprovedDestination
+      this.removeFromUnApprovedDestinationList([destination]);
+
+      //remove them from pending destinations
+      this.removeFromPendingDestinationList([destination]);
+
+      //add them to approved destination
+      this.addToApprovedDestinationList([destination]);
+    } catch (error) {
+      console.log('approve failed');
     }
   }
 
-  handleApproveDestination(id: number): void {
-    const destinationToApprove = this.pendingDestinations().find((dest) => dest.id === id);
-    if (destinationToApprove) {
-      this.pendingDestinations.update((destinations) =>
-        destinations.filter((dest) => dest.id !== id),
-      );
-      this.approvedDestinations.update((destinations) => [...destinations, destinationToApprove]);
-    }
-  }
+  async handleRemoveDestination(destination: Destination) {
+    const user = this.loginService.getCurrentUser();
+    const apiUrl = 'http://localhost:8080/admin/remove-destination';
 
-  handleRemoveDestination(id: number): void {
-    const destinationToRemove = this.approvedDestinations().find((dest) => dest.id === id);
-    if (destinationToRemove) {
-      this.approvedDestinations.update((destinations) =>
-        destinations.filter((dest) => dest.id !== id),
+    try {
+      const response: HttpResponse<any> = await firstValueFrom(
+        this.http.post<any>(apiUrl, destination, {
+          headers: new HttpHeaders({
+            authorization: user?.token || '',
+            userId: user?.userId || 0,
+          }),
+          observe: 'response',
+        }),
       );
+      console.log(response);
+
+      //remove from approved destination
+      this.addToUnApprovedDestinationList([destination]);
+
+      //add them to approved destination
+      this.removeFromApprovedDestinationList([destination]);
+    } catch (error) {
+      console.log('remove failed');
     }
   }
 
@@ -233,6 +256,14 @@ export class DestinationTableService {
     });
   }
 
+  removeFromApprovedDestinationList(destinations: Destination[]) {
+    this.approvedDestinations.update((prev) => {
+      const existingCountries = new Set(destinations.map((d) => d.country));
+
+      return prev.filter((d) => !existingCountries.has(d.country));
+    });
+  }
+
   addToApprovedDestinationList(destinations: Destination[]) {
     this.approvedDestinations.update((prev) => {
       const existingCountries = new Set(prev.map((d) => d.country));
@@ -240,6 +271,27 @@ export class DestinationTableService {
       const newOnes = destinations.filter((d) => !existingCountries.has(d.country));
 
       return [...prev, ...newOnes];
+    });
+  }
+
+  addToUnApprovedDestinationList(destinations: Destination[]) {
+    this.unApprovedDestinations.update((prev) => {
+      const existingCountries = new Set(prev.map((d) => d.country));
+
+      const newOnes = destinations.filter((d) => !existingCountries.has(d.country));
+
+      const unApprovedNew: UnApprovedDestinations[] = newOnes.map((d: any) => {
+        const destination = new UnApprovedDestinations();
+        destination.country = d.country;
+        destination.capital = d.capital;
+        destination.region = d.region;
+        destination.population = d.population;
+        destination.currency = d.currency;
+        destination.flagUrl = d.flagUrl ?? '';
+
+        return destination;
+      });
+      return [...prev, ...unApprovedNew];
     });
   }
 }

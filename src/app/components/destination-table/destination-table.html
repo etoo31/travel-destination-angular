@@ -29,11 +29,11 @@
             }
             <td class="table-actions">
               @if (type() === 'pending') {
-                <button class="btn btn-success btn-small" (click)="handleApprove(destinantion.id)">
+                <button class="btn btn-success btn-small" (click)="handleApprove(destinantion)">
                   Approve
                 </button>
               } @else {
-                <button class="btn btn-danger btn-small" (click)="handleRemove(destinantion.id)">
+                <button class="btn btn-danger btn-small" (click)="handleRemove(destinantion)">
                   Remove
                 </button>
               }

@@ -1,5 +1,6 @@
 import { Component, computed, inject, input, OnInit } from '@angular/core';
 import { DestinationTableService } from '../../services/destination-table-service';
+import { Destination } from '../../models/destinations.type';
 
 @Component({
   selector: 'app-destination-table',
@@ -20,11 +21,11 @@ export class DestinationTable implements OnInit {
 
   destinations = computed(() => this.destinationTableService.getDestinationsByType(this.type()));
 
-  handleApprove(destinationId: number) {
-    this.destinationTableService.handleApproveDestination(destinationId);
+  handleApprove(destination: Destination) {
+    this.destinationTableService.handleApproveDestination(destination);
   }
 
-  handleRemove(destinationId: number) {
-    this.destinationTableService.handleRemoveDestination(destinationId);
+  handleRemove(destination: Destination) {
+    this.destinationTableService.handleRemoveDestination(destination);
   }
 }
