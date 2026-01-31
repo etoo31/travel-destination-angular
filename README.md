@@ -39,6 +39,6 @@ npm start
 ```
 ---
 
-⚠️ Make sure the port number 4200 is free to use
+####⚠️ Make sure the port number 4200 is free to use
 ---
-⚠️ Don't for get to run the backend application. [Backend Application](https://github.com/etoo31/travel-destination-spring-boot)
+####⚠️ Don't for get to run the backend application. [Backend Application](https://github.com/etoo31/travel-destination-spring-boot)
