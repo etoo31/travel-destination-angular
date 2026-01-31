@@ -1,4 +1,4 @@
-@for (destination of destinations(); track destination.id) {
+@for (destination of destinations(); track destination.country) {
   <div class="destination-card">
     <div class="destination-flag">
       <img alt="Flag of {{ destination.country }}" src="{{ destination.flagUrl }}" />
@@ -8,8 +8,6 @@
         <h3 class="destination-title">
           {{ destination.country }}
         </h3>
-        <!-- <button id="fav-{{destination.id}}" class="favorite-btn {{isFav ? 'active' : ''}}" title="{isFav ? 'Remove from favorites' : 'Add to favorites'}">
-         {isFav ? '❤️' : '🤍'} </button> -->
       </div>
       <div class="destination-info">
         <div class="info-row">

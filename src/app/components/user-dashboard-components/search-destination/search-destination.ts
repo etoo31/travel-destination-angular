@@ -1,8 +1,9 @@
-import { Component, computed, inject, signal } from '@angular/core';
+import { Component, computed, inject, OnInit, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { DestinationService } from '../../../services/destination-service';
 import { SearchFilterPipe } from '../../../pipes/search-filter.pipe';
+import { UnApprovedDestinations } from '../../../models/unApprovedDestination.type';
 
 @Component({
   selector: 'app-search-destination',
@@ -11,7 +12,10 @@ import { SearchFilterPipe } from '../../../pipes/search-filter.pipe';
   templateUrl: './search-destination.html',
   styleUrl: './search-destination.css',
 })
-export class SearchDestination {
+export class SearchDestination implements OnInit {
+  ngOnInit(): void {
+    this.destinationService.getUnApprovedDestinations();
+  }
   destinationService = inject(DestinationService);
 
   searchQuery = signal('');
@@ -21,7 +25,14 @@ export class SearchDestination {
     return this.destinations().some((destination) => destination.isFav !== destination.wasFav);
   });
 
-  toggleWantToVisit(destinationId: number) {
+  toggleWantToVisit(destinationId: string) {
     this.destinationService.toggleUnApprovedDestinationFav(destinationId);
+  }
+
+  AddToFav() {
+    const changed = this.destinations().filter((d) => d.isFav !== d.wasFav);
+
+    console.log(changed);
+    this.destinationService.addToFavoriteDestination(changed);
   }
 }

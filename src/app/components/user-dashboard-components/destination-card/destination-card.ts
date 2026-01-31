@@ -10,5 +10,5 @@ import { DestinationService } from '../../../services/destination-service';
 export class DestinationCard {
   destinationService = inject(DestinationService);
 
-  destinations = computed(() => this.destinationService.getDestinations());
+  destinations = computed(() => this.destinationService.destinations());
 }

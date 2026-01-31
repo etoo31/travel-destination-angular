@@ -19,7 +19,8 @@ export class UserDashboardPage implements OnInit {
   ngOnInit(): void {
     this.loginService.checkLogin();
     this.loginService.isUser();
+    this.destinationService.getApprovedDestinations();
   }
 
-  destinations = computed(() => this.destinationService.getDestinations());
+  destinations = computed(() => this.destinationService.destinations());
 }
