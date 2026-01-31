@@ -1,4 +1,4 @@
-import { Component, computed, inject, input } from '@angular/core';
+import { Component, computed, inject, input, OnInit } from '@angular/core';
 import { DestinationTableService } from '../../services/destination-table-service';
 
 @Component({
@@ -7,7 +7,13 @@ import { DestinationTableService } from '../../services/destination-table-servic
   templateUrl: './destination-table.html',
   styleUrl: './destination-table.css',
 })
-export class DestinationTable {
+export class DestinationTable implements OnInit {
+  ngOnInit(): void {
+    if (this.type() === 'pending') this.destinationTableService.getApprovedDestinations();
+    else if (this.type() === 'approved') {
+      this.destinationTableService.getPendingDestinations();
+    }
+  }
   //pending || approved
   type = input.required<string>();
   destinationTableService = inject(DestinationTableService);

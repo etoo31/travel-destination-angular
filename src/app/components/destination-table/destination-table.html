@@ -14,7 +14,7 @@
     </thead>
     <tbody id="suggestionsTableBody">
       @if (destinations().length > 0) {
-        @for (destinantion of destinations(); track destinantion.id) {
+        @for (destinantion of destinations(); track destinantion.country) {
           <tr>
             <td>
               <strong>{{ destinantion.country }}</strong>

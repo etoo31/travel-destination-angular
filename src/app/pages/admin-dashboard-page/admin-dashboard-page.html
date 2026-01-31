@@ -38,12 +38,12 @@
                 <label class="approve-checkbox">
                   <input
                     type="checkbox"
-                    [checked]="isSelectedForApproval(destination.id)"
-                    (change)="toggleSelectForApproval(destination.id)"
+                    [checked]="isSelectedForApproval(destination)"
+                    (change)="toggleSelectForApproval(destination)"
                     class="checkbox-input"
                   />
                   <span class="checkbox-icon">
-                    {{ isSelectedForApproval(destination.id) ? '✅' : '☐' }}
+                    {{ isSelectedForApproval(destination) ? '✅' : '☐' }}
                   </span>
                 </label>
               </div>
