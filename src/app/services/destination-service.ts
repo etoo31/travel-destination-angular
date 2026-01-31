@@ -123,9 +123,20 @@ export class DestinationService {
           observe: 'response',
         }),
       );
+      //update unApproved Destination list by setting wasFav to isFav
+      this.updateFavDestination();
       console.log(response);
     } catch (error) {
       console.log('fetch failed');
     }
+  }
+
+  updateFavDestination() {
+    this.unApprovedDestinations.update((prev) => {
+      return prev.map((d) => {
+        d.wasFav = d.isFav;
+        return d;
+      });
+    });
   }
 }

@@ -3,7 +3,6 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { DestinationService } from '../../../services/destination-service';
 import { SearchFilterPipe } from '../../../pipes/search-filter.pipe';
-import { UnApprovedDestinations } from '../../../models/unApprovedDestination.type';
 
 @Component({
   selector: 'app-search-destination',
