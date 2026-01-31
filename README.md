@@ -1,59 +1,44 @@
-# TravelDestination
+# 🌍 Travel Destination – Angular Project
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 21.1.1.
+This is a **front-end Angular application** for a travel destination planner. [Demo Video](https://drive.google.com/file/d/1VqmdOwzAY3HJT7mYTBNYzC9xevIm5kUH/view?usp=sharing)
+It provides a responsive interface for users to browse, search, and manage travel destinations.
 
-## Development server
+---
 
-To start a local development server, run:
+## 🚀 Tech Stack
 
-```bash
-ng serve
-```
+- Angular 21
+- TypeScript 5.9
+- RxJS 7.8
+- HTML & CSS
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+---
 
-## Code scaffolding
+## 📂 Project Requirements
 
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
+Make sure you have:
 
-```bash
-ng generate component component-name
-```
+- Node.js 20+  
+- NPM 11.6.2 (or compatible version)  
+- Angular CLI 21.1  
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
+---
 
-```bash
-ng generate --help
-```
+## ▶️ Running the Application
 
-## Building
-
-To build the project run:
+### 1. Install dependencies
 
 ```bash
-ng build
+npm install
 ```
 
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
-
-## Running unit tests
-
-To execute unit tests with the [Vitest](https://vitest.dev/) test runner, use the following command:
-
-```bash
-ng test
+---
+## Start the development server
 ```
-
-## Running end-to-end tests
-
-For end-to-end (e2e) testing, run:
-
-```bash
-ng e2e
+npm start
 ```
+---
 
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
-
-## Additional Resources
-
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+## ⚠️ Make sure the port number 4200 is free to use
+---
+## ⚠️ Don't for get to run the backend application. [Backend Application](https://github.com/etoo31/travel-destination-spring-boot)
