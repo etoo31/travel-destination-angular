@@ -1,5 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { LoginCard } from '../../components/login-card/login-card';
+import { LoginService } from '../../services/login-service';
 
 @Component({
   selector: 'app-login-page',
@@ -7,4 +8,9 @@ import { LoginCard } from '../../components/login-card/login-card';
   templateUrl: './login-page.html',
   styleUrl: './login-page.css',
 })
-export class LoginPage {}
+export class LoginPage implements OnInit {
+  loginService = inject(LoginService);
+  ngOnInit(): void {
+    this.loginService.isAnonymous();
+  }
+}

@@ -1,9 +1,10 @@
-import { Component, computed, inject, signal } from '@angular/core';
+import { Component, computed, inject, OnInit, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Nav } from '../../components/nav/nav';
 import { DestinationService } from '../../services/destination-service';
 import { UnApprovedDestinations } from '../../models/unApprovedDestination.type';
 import { DestinationTable } from '../../components/destination-table/destination-table';
+import { LoginService } from '../../services/login-service';
 
 @Component({
   selector: 'app-admin-dashboard-page',
@@ -12,8 +13,13 @@ import { DestinationTable } from '../../components/destination-table/destination
   templateUrl: './admin-dashboard-page.html',
   styleUrl: './admin-dashboard-page.css',
 })
-export class AdminDashboardPage {
+export class AdminDashboardPage implements OnInit {
+  ngOnInit(): void {
+    this.loginService.checkLogin();
+    this.loginService.isAdmin();
+  }
   destinationService = inject(DestinationService);
+  loginService = inject(LoginService);
 
   itemsPerPage = signal(5);
   currentPage = signal(1);

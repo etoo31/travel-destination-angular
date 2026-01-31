@@ -1,11 +1,14 @@
-import { Injectable, signal } from '@angular/core';
+import { inject, Injectable, signal } from '@angular/core';
 import { Destination } from '../models/destinations.type';
 import { UnApprovedDestinations } from '../models/unApprovedDestination.type';
+import { LoginService } from './login-service';
 
 @Injectable({
   providedIn: 'root',
 })
 export class DestinationService {
+  loginService = inject(LoginService);
+
   destinations = signal<Destination[]>([
     {
       id: 1,
@@ -63,7 +66,7 @@ export class DestinationService {
     },
   ]);
 
-  getUnApprovedDestinations() {
+  async getUnApprovedDestinations() {
     return this.unApprovedDestinations();
   }
 
